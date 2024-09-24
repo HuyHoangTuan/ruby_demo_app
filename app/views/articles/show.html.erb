@@ -1,0 +1,31 @@
+<h1><%= @article.title %></h1>
+<div>
+    <%= link_to "Edit", edit_article_path(@article) %>
+    <%= link_to "Delete", article_path(@article), data: wrap_delete_method %>
+</div>
+<p><%= @article.body %></p>
+
+<div>
+    <h2>Comments:</h2>
+    <div>
+        <% unless @article.comments.empty? %>
+            <% @article.comments.each_with_index do |comment, idx| %>
+                <%= render_comment(comment, idx) %>
+            <% end %>
+        <% end %>
+    </div>
+    <div>
+        <h3>Add a comment:</h3>
+        <%= form_with model: [@article, @article.comments.build] do |form| %>
+            <%= render_comment_form form %>
+            <% if @comment %>
+                <%= notice_edit_error(@comment.errors, :commenter) %>
+                <%= notice_edit_error(@comment.errors, :body) %>
+            <% end %>
+
+        <% end %>
+
+    </div>
+</div>
+
+
