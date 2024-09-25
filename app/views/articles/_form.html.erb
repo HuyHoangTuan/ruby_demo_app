@@ -5,14 +5,14 @@
         <%= form.label :title %>
         <br/>
         <%= form.text_field :title %>
-        <%= notice_edit_error(article.errors, :title) %>
+        <%= notice_edit_error(article.errors, [:title]) %>
     </div>
 
     <div>
         <%= form.label :body %>
         <br/>
         <%= form.text_area :body %>
-        <%= notice_edit_error(article.errors, :body) %>
+        <%= notice_edit_error(article.errors, [:body]) %>
     </div>
 
     <div>

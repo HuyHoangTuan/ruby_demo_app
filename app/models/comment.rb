@@ -6,9 +6,7 @@ class Comment < ApplicationRecord
 
     private
         def set_defaults
-            puts commenter
-            puts commenter.blank?
-            commenter = "Anonymous" if commenter.blank?
-            puts commenter
+            # puts "#{self.commenter} - #{self.commenter.blank?}"
+            self.commenter = "Anonymous" if self.commenter.blank?
         end
 end

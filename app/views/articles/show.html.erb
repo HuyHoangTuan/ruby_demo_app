@@ -8,23 +8,11 @@
 <div>
     <h2>Comments:</h2>
     <div>
-        <% unless @article.comments.empty? %>
-            <% @article.comments.each_with_index do |comment, idx| %>
-                <%= render_comment(comment, idx) %>
-            <% end %>
-        <% end %>
+        <h3>Add a comment:</h3>
+        <%= render "comments/form", article: @article, comment: @comment %>
     </div>
     <div>
-        <h3>Add a comment:</h3>
-        <%= form_with model: [@article, @article.comments.build] do |form| %>
-            <%= render_comment_form form %>
-            <% if @comment %>
-                <%= notice_edit_error(@comment.errors, :commenter) %>
-                <%= notice_edit_error(@comment.errors, :body) %>
-            <% end %>
-
-        <% end %>
-
+        <%= render @article.comments.select{|comment| comment.persisted?} %>
     </div>
 </div>
 

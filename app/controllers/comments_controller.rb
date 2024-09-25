@@ -6,10 +6,15 @@ class CommentsController < ApplicationController
     public
         def create
             @article = Article.find(params[:article_id])
-            # puts @article
-            @comment = @article.comments.create(comment_params)
-            puts "#{@comment.commenter} #{@comment.body} #{@comment.article_id} #{@comment.errors.empty?}"
-            redirect_to article_path(@article)
+            @comment = @article.comments.build(comment_params)
+            # puts "#{@comment.commenter} #{@comment.body} #{@comment.article_id} #{@comment.errors.empty?}"
+
+            if @comment.save
+                redirect_to article_path(@article)
+            else
+                # puts "#{@comment.commenter} #{@comment.body} #{@comment.article_id} #{@comment.errors.empty?}"
+                render :'articles/show', status: :unprocessable_content
+            end
         end
 
 end
